@@ -35,16 +35,17 @@ class EmpleatsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Empleats $empleats)
     {
-        $request->validate([
+        /* $request->validate([
             'name' => 'required|max:15',
             'salary' => 'required|gte:50'
-        ]);
+        ]); */
         /* return 'Anem a desar les dades'; */
-        $empleat = Empleat::create($request->only('name', 'salary', 'comments'));
+        $empleat = Empleats::create($request->only('name', 'due', 'comments'));
 
         return redirect()->route('empleats.index');
+
     }
 
     /**
@@ -80,7 +81,12 @@ class EmpleatsController extends Controller
      */
     public function update(Request $request, Empleats $empleats)
     {
-        //
+        $empleats->name = $request['name'];
+        $empleats->due = $request['due'];
+        $empleats->comments = $request['comments'];
+        $empleats->save();
+
+        return redirect()->route('empleats.index');
     }
 
     /**
@@ -91,6 +97,7 @@ class EmpleatsController extends Controller
      */
     public function destroy(Empleats $empleats)
     {
-        //
+        $empleats->delete();
+        return redirect()->route('empleats.index');
     }
 }

@@ -21,7 +21,13 @@
       <td>{{$item->due}}</td>
       <td>
         <a href="{{route('empleats.edit', $item)}}" class="btn btn-warning">Editar</a>
-      Eliminar</td>
+        <form action="{{ route('empleats.destroy', $item) }}" method="post" class="d-inline">
+          @csrf
+          @method('DELETE')
+          <button type="submit" class="btn btn-danger">Eliminar</button>
+        </form>
+
+      </td>
     </tr>
     @empty
       <td colspan="3">Actualment no hi ha registres</td>

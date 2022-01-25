@@ -11,63 +11,69 @@
 
     @if (isset($empleat))
     <form action="{{ route('empleats.update', '$empleat')}}" method="post">
+    @method('PUT')
     @csrf
    <div class="mb-3">
-   <label for="nom" class="form-label">Nom</label>
-       <input type="text" name="nom" class="form-control" placeholder="Nom de l'empleat" step="0,01">
+   <label for="name" class="form-label">Nom
+       <input type="text" name="name" id="name" class="form-control" placeholder="Nom de l'empleat" step="0,01" value="{{old('name') ?? @$empleats->name}}">
        @error('name')
            <p class="form-text text-danger">{{$message}}</p>
        @enderror
-
+    </label>
     </div>
    <div class="mb-3">
-       <label for="salary" class="form-label">Salari</label>
-       <input type="number" name="salary" class="form-control" placeholder="Salari de l'empleat" step="0,01">
-       @error('salari')
+       <label for="due" class="form-label">Salari
+       <input type="number" name="due" id="due" class="form-control" placeholder="Salari de l'empleat" step="0,01" value="{{old('due') ??@$empleat->due}}">
+       @error('due')
            <p class="form-text text-danger">{{$message}}</p>
        @enderror
-
+        </label>
     </div>
    <div class="mb-3">
-        <label for="comentaris" class="form-label">Comentaris</label>
+        <label for="comments" class="form-label">Comentaris
         <br>
-        <textarea name="comentaris" id="comentaris" cols="70" rows="10" placeholder="Observacions de l'empleat"></textarea>
-        @error('comentaris')
+        <textarea name="comments" id="comments" cols="70" rows="10" placeholder="Observacions de l'empleat" value="{{old('comments') ??@$empleat->comments}}"></textarea>
+        @error('comments')
            <p class="form-text text-danger">{{$message}}</p>
        @enderror
-
+        </label>
    </div>
-    </form>
-        @method('PUT')
+   @if (isset($empleat))
+        <button type="submit" class="btn btn-info">Editar Empleat</button>
     @else
-    <form action="{{ route('empleats.store')}}" method="post">
+        <button type="submit" class="btn btn-info">Desar Empleat</button>
+    @endif
+    </form>
+        
+    @else
+    <form action="{{ route('empleats.update')}}" method="post">
     @csrf
    <div class="mb-3">
-   <label for="nom" class="form-label">Nom</label>
-       <input type="text" name="nom" class="form-control" placeholder="Nom de l'empleat" step="0,01">
+   <label for="name" class="form-label">Nom
+       <input type="text" name="name" id="name" class="form-control" placeholder="Nom de l'empleat" step="0,01">
        @error('name')
            <p class="form-text text-danger">{{$message}}</p>
        @enderror
-
+    </label>
     </div>
    <div class="mb-3">
-       <label for="salary" class="form-label">Salari</label>
-       <input type="number" name="salary" class="form-control" placeholder="Salari de l'empleat" step="0,01">
-       @error('salari')
+       <label for="due" class="form-label">Salari
+       <input type="number" name="due" id="due" class="form-control" placeholder="Salari de l'empleat" step="0,01">
+       @error('due')
            <p class="form-text text-danger">{{$message}}</p>
        @enderror
-
+        </label>
     </div>
    <div class="mb-3">
-        <label for="comentaris" class="form-label">Comentaris</label>
+        <label for="comments" class="form-label">Comentaris
         <br>
-        <textarea name="comentaris" id="comentaris" cols="70" rows="10" placeholder="Observacions de l'empleat"></textarea>
-        @error('comentaris')
+        <textarea name="comments" id="comments" cols="70" rows="10" placeholder="Observacions de l'empleat"></textarea>
+        @error('comments')
            <p class="form-text text-danger">{{$message}}</p>
        @enderror
-
+        </label>
    </div>
-    </form>
+    
         @endif
 
     @if (isset($empleat))
@@ -75,7 +81,7 @@
     @else
         <button type="submit" class="btn btn-info">Desar Empleat</button>
     @endif
-</form>
+    </form>
 </div>
   
 @endsection

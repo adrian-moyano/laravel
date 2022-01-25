@@ -16,4 +16,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::resource('empleats', App\Http\Controllers\EmpleatsController::class);
+Route::resource('productos', App\Http\Controllers\ProductosController::class);
